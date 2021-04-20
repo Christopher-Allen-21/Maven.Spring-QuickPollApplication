@@ -27,7 +27,7 @@ public class PollController {
     }
 
     @PostMapping("/polls")
-    public ResponseEntity<?> createPoll(Poll poll){
+    public ResponseEntity<?> createPoll(@RequestBody Poll poll){
         poll = repository.save(poll);
         URI newPollUri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -44,7 +44,7 @@ public class PollController {
     }
 
     @PutMapping("/polls/{pollId}")
-    public ResponseEntity<?> updatePoll(@PathVariable Long pollId,Poll poll){
+    public ResponseEntity<?> updatePoll(@PathVariable Long pollId,@RequestBody Poll poll){
         Poll p = repository.save(poll);
         return new ResponseEntity<>(HttpStatus.OK);
     }

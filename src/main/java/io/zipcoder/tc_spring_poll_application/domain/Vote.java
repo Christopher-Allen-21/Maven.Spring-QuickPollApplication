@@ -23,4 +23,12 @@ public class Vote {
         this.option = option;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public Option getOption() {
+        return option;
+    }
+
 }
