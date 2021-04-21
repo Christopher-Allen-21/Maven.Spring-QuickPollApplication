@@ -20,12 +20,18 @@ public class VoteController {
         this.repository = repository;
     }
 
-    @GetMapping("/polls/{pollId}/votes")
-    public ResponseEntity<Iterable<Vote>> getVotes(@PathVariable Long pollId){
-        Iterable<Vote> allVotes = repository.findAll();
-        return new ResponseEntity<>(allVotes, HttpStatus.OK);
+
+    @GetMapping("/polls/votes")
+    public Iterable<Vote> getAllVotes(){
+        return repository.findAll();
     }
 
+    @GetMapping("/polls/{pollId}/votes")
+    public Vote getVote(@PathVariable Long pollId){
+        return repository.findOne(pollId);
+    }
+
+    //NOT QUITE WORKING AS EXPECTED
     @PostMapping("/polls/{pollId}/votes")
     public ResponseEntity<?> createVote(@PathVariable Long pollId, @RequestBody Vote vote) {
         vote = repository.save(vote);
