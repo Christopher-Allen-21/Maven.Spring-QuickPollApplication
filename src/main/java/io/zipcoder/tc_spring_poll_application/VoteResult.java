@@ -15,6 +15,10 @@ public class VoteResult {
         this.totalVotes = totalVotes;
     }
 
+    public void incrementVotes(){
+        totalVotes++;
+    }
+
     public Collection<OptionCount> getResults() {
         return results;
     }

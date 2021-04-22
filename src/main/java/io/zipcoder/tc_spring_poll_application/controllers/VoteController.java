@@ -22,13 +22,13 @@ public class VoteController {
 
 
     @GetMapping("/polls/votes")
-    public Iterable<Vote> getAllVotes(){
+    public Iterable<Vote> getAllVotesFromAllPolls(){
         return repository.findAll();
     }
 
     @GetMapping("/polls/{pollId}/votes")
-    public Vote getVote(@PathVariable Long pollId){
-        return repository.findOne(pollId);
+    public Iterable<Vote> getVoteFromPoll(@PathVariable Long pollId){
+        return repository.findVotesByPoll(pollId);
     }
 
     //NOT QUITE WORKING AS EXPECTED
