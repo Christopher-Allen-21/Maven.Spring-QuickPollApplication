@@ -1,4 +1,6 @@
-package io.zipcoder.tc_spring_poll_application;
+package io.zipcoder.tc_spring_poll_application.dto;
+
+import io.zipcoder.tc_spring_poll_application.dto.OptionCount;
 
 import java.util.Collection;
 

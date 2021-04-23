@@ -1,20 +1,18 @@
 package io.zipcoder.tc_spring_poll_application.controllers;
 
-import io.zipcoder.tc_spring_poll_application.OptionCount;
-import io.zipcoder.tc_spring_poll_application.VoteResult;
+import io.zipcoder.tc_spring_poll_application.dto.OptionCount;
+import io.zipcoder.tc_spring_poll_application.dto.VoteResult;
 import io.zipcoder.tc_spring_poll_application.domain.Vote;
 import io.zipcoder.tc_spring_poll_application.repositories.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 public class ComputeResultController {
