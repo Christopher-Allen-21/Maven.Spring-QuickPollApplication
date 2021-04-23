@@ -30,37 +30,40 @@ public class ComputeResultController {
     //The computeResult method takes pollId as its parameter.
     //The @RequestParam annotation instructs Spring to retrieve the pollId value from a HTTP query parameter.
     //The computed results are sent to the client using a newly created instance of ResponseEntity.
-    @GetMapping("/computeResult/{pollId}")
-    public ResponseEntity<?> computeResult(@PathVariable Long pollId) {
+    @GetMapping("/polls/computeResult")
+    public ResponseEntity<?> computeResult(@RequestParam Long pollId) {
         VoteResult voteResult = new VoteResult();
         Iterable<Vote> allVotes = repository.findVotesByPoll(pollId);
 
-        //TODO: Implement algorithm to count votes
         voteResult.setResults(new ArrayList<OptionCount>());
-        Collection<OptionCount> optionCountList = voteResult.getResults();
-        for(Vote v: allVotes){
-            if(optionCountList.isEmpty()){
-                OptionCount optionCount = new OptionCount(v.getOption().getId());
-                optionCountList.add(optionCount);
-            }
-            else{
-                boolean isPresent = false;
-                for(OptionCount oc : optionCountList){
-                    //check if option id already in OptionCountList
-                    if(oc.getOptionId() == v.getOption().getId()){
-                        oc.incrementOptionId();
-                        isPresent = true;
-                    }
-                }
-                if(!isPresent){
-                    OptionCount optionCount = new OptionCount(v.getOption().getId());
-                    optionCountList.add(optionCount);
-                }
-            }
+        Collection<OptionCount> list = voteResult.getResults();
+        for (Vote vote : allVotes) {
             voteResult.incrementVotes();
         }
 
-        voteResult.setResults(optionCountList);
+        for (Vote vote : allVotes) {
+            if (list.isEmpty()) {
+                OptionCount random = new OptionCount(vote.getOption().getId(), 0);
+                list.add(random);
+            }
+            Long temp = vote.getOption().getId();
+            boolean isPresent = true;
+            for (OptionCount oc : list) {
+                isPresent = false;
+                if (oc.getOptionId().equals(temp)) {
+                    oc.increaseCount();
+                    isPresent = true;
+                }
+            }
+            if (!isPresent) {
+                OptionCount anotherOne = new OptionCount(vote.getOption().getId(), 0);
+                list.add(anotherOne);
+                anotherOne.increaseCount();
+            }
+        }
+
+        voteResult.setResults(list);
         return new ResponseEntity<VoteResult>(voteResult, HttpStatus.OK);
     }
+
 }

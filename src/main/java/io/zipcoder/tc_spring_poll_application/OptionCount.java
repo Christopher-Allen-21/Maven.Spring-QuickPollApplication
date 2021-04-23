@@ -3,25 +3,20 @@ package io.zipcoder.tc_spring_poll_application;
 import io.zipcoder.tc_spring_poll_application.domain.Option;
 
 public class OptionCount {
-
     private Long optionId;
     private int count;
 
-    public OptionCount(Long optionId){
+    public OptionCount(Long optionId, int count) {
         this.optionId = optionId;
-        this.count = 1;
+        this.count = count;
     }
 
-    public Long getOptionId(){
+    public Long getOptionId() {
         return optionId;
     }
 
-    public void setOptionId(Long optionId){
+    public void setOptionId(Long optionId) {
         this.optionId = optionId;
-    }
-
-    public void incrementOptionId(){
-        this.optionId++;
     }
 
     public int getCount() {
@@ -30,5 +25,9 @@ public class OptionCount {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public void increaseCount () {
+        this.count++;
     }
 }

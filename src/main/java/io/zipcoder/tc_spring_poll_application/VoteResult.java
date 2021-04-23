@@ -3,7 +3,6 @@ package io.zipcoder.tc_spring_poll_application;
 import java.util.Collection;
 
 public class VoteResult {
-
     private int totalVotes;
     private Collection<OptionCount> results;
 
@@ -15,15 +14,15 @@ public class VoteResult {
         this.totalVotes = totalVotes;
     }
 
-    public void incrementVotes(){
-        totalVotes++;
-    }
-
     public Collection<OptionCount> getResults() {
         return results;
     }
 
     public void setResults(Collection<OptionCount> results) {
         this.results = results;
+    }
+
+    public void incrementVotes() {
+        this.totalVotes++;
     }
 }

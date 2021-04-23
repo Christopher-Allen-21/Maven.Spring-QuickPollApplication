@@ -55,6 +55,8 @@ public class PollController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    public void verifyPoll(){
 
+    }
 
 }
